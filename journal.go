@@ -3,16 +3,16 @@ package financialstatements
 import "time"
 
 type JournalEntry struct {
-	Id      string
-	Date    time.Time
-	Memo    string
-	Debits  []JournalAmount
-	Credits []JournalAmount
+	Id      string          `json:"_id"`
+	Date    time.Time       `json:"date"`
+	Memo    string          `json:"memo"`
+	Debits  []JournalAmount `json:"debits"`
+	Credits []JournalAmount `json:"credits"`
 }
 
 type JournalAmount struct {
-	Account *Account
-	Value   int64
+	Account *Account `json:"account"`
+	Value   int64    `json:"value"`
 }
 
 func (rg *ReportGenerator) Journal(from, to time.Time) ([]*JournalEntry, error) {

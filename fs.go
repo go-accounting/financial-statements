@@ -15,25 +15,25 @@ type DataSource interface {
 }
 
 type Transaction struct {
-	Id      string
-	Date    time.Time
-	Memo    string
-	Entries Entries
-	Removes string
-	Created time.Time
+	Id      string    `json:"_id"`
+	Date    time.Time `json:"date"`
+	Memo    string    `json:"memo"`
+	Entries Entries   `json:"entries"`
+	Removes string    `json:"-"`
+	Created time.Time `json:"created"`
 }
 
 type Entries map[string]int64
 
 type Account struct {
-	Id                   string
-	Number               string
-	Name                 string
-	IncreaseOnDebit      bool
-	Summary              bool
-	BalanceSheet         bool
-	IncomeStatement      bool
-	IncomeStatementGroup string
+	Id                   string `json:"_id"`
+	Number               string `json:"number"`
+	Name                 string `json:"name"`
+	IncreaseOnDebit      bool   `json:"increaseOnDebit"`
+	Summary              bool   `json:"-"`
+	BalanceSheet         bool   `json:"-"`
+	IncomeStatement      bool   `json:"-"`
+	IncomeStatementGroup string `json:"-"`
 }
 
 func NewReportGenerator(ds DataSource) *ReportGenerator {

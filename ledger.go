@@ -6,18 +6,23 @@ import (
 )
 
 type Ledger struct {
-	Account *Account
-	Balance int64
-	Entries []*LedgerEntry
+	Account *Account       `json:"account"`
+	Balance int64          `json:"balance"`
+	Entries []*LedgerEntry `json:"entries"`
 }
 
 type LedgerEntry struct {
-	Id          string
-	Date        time.Time
-	Memo        string
-	Counterpart struct{ Number, Name string }
-	Balance     int64
+	Id          string      `json:"_id"`
+	Date        time.Time   `json:"date"`
+	Memo        string      `json:"memo"`
+	Counterpart Counterpart `json:"counterpart"`
+	Balance     int64       `json:"balance"`
 	created     time.Time
+}
+
+type Counterpart struct {
+	Number string `json:"number"`
+	Name   string `json:"name"`
 }
 
 func (rg *ReportGenerator) Ledger(accountId string, from, to time.Time) (*Ledger, error) {
@@ -43,7 +48,7 @@ func (rg *ReportGenerator) Ledger(accountId string, from, to time.Time) (*Ledger
 			func(i int) { result.Entries = append(result.Entries[:i], result.Entries[i+1:]...) }) {
 			continue
 		}
-		counterpart := struct{ Number, Name string }{}
+		counterpart := Counterpart{}
 		for k, v := range t.Entries {
 			if sign(v) == sign(t.Entries[accountId]) {
 				continue

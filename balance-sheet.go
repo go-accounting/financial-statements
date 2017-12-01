@@ -7,8 +7,8 @@ import (
 )
 
 type Balance struct {
-	Account *Account
-	Value   int64
+	Account *Account `json:"account"`
+	Value   int64    `json:"value"`
 }
 
 func (rg *ReportGenerator) BalanceSheet(at time.Time) ([]*Balance, error) {
