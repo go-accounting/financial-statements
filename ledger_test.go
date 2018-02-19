@@ -53,4 +53,7 @@ func TestLedger(t *testing.T) {
 	if l := len(ledger.Entries); l != 5 {
 		t.Errorf("Ledger must have five entries and have %v", l)
 	}
+	if ledger.Balance != 0 {
+		t.Error("Ledger's balance must be 0 but was", ledger.Balance)
+	}
 }

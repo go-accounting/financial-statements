@@ -30,7 +30,7 @@ func (rg *ReportGenerator) Ledger(accountId string, from, to time.Time) (*Ledger
 	if err != nil {
 		return nil, err
 	}
-	e, err := rg.ds.Balances([]string{accountId}, time.Time{}, to.AddDate(0, 0, -1))
+	e, err := rg.ds.Balances([]string{accountId}, time.Time{}, from.AddDate(0, 0, -1))
 	if err != nil {
 		return nil, err
 	}
