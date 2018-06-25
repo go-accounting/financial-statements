@@ -54,11 +54,11 @@ func (rg *ReportGenerator) Ledger(accountId string, from, to time.Time) (*Ledger
 				continue
 			}
 			if counterpart.Name == "" {
-				counterpart.Number = k
 				c, err := rg.ds.Account(k)
 				if err != nil {
 					return nil, err
 				}
+				counterpart.Number = c.Number
 				counterpart.Name = c.Name
 			} else {
 				counterpart.Number = ""
